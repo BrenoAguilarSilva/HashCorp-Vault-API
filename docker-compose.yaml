@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    ports:
+      - "8201:8201"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "myroot"
+      VAULT_LOCAL_CONFIG: |
+        {
+          "storage": {
+            "file": {
+              "path": "/vault/file"
+            }
+          },
+          "listener": [
+            {
+              "tcp": {
+                "address": "0.0.0.0:8201",
+                "tls_disable": true
+              }
+            }
+          ],
+          "api_addr": "http://localhost:8201",
+          "default_lease_ttl": "168h",
+          "max_lease_ttl": "720h",
+          "ui": true
+        }
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/logs:/vault/logs
+
