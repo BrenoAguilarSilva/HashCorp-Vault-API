@@ -1,4 +1,4 @@
-# z-one-vault-api
+# hashcCorp-Vault-api
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
